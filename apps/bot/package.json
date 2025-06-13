@@ -1,0 +1,36 @@
+{
+  "name": "bot",
+  "version": "0.0.1",
+  "description": "An advanced, multi-use Discord bot.",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "commandkit build",
+    "start": "commandkit start",
+    "dev": "commandkit dev",
+    "watch": "commandkit build --watch",
+    "types": "tsc --noEmit"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "typescript",
+    "astra"
+  ],
+  "author": "maybeizen",
+  "license": "MIT",
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "chalk": "5.4.1",
+    "commandkit": "^0.1.10",
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.5.0",
+    "mongoose": "^8.15.1"
+  }
+}
