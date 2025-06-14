@@ -13,5 +13,6 @@ export default defineConfig({
   treeshake: true,
   bundle: true,
   skipNodeModulesBundle: true,
-  external: ["express"],
+  external: ["express", "mongoose"],
+  onSuccess: "pnpm run start",
 });

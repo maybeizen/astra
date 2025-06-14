@@ -1,5 +1,4 @@
 import mongoose, { Connection } from "mongoose";
-import { errorHandler } from "./error-handler";
 
 interface DatabaseProps {
   uri: string | undefined;
@@ -25,7 +24,6 @@ export default class Database {
       console.log(`Connected to MongoDB | ${connection.connection.host}`);
     } catch (error: any) {
       console.error(error);
-      errorHandler.execute(error);
     }
   }
 
