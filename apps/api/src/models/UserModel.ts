@@ -5,29 +5,38 @@ const userSchema = new mongoose.Schema<UserType>({
   email: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
     lowercase: true,
   },
-  username: {
+  discordId: {
     type: String,
     required: true,
     unique: true,
-    trim: true,
-    minlength: 3,
-    maxlength: 30,
   },
-  password: {
+  discordUsername: {
     type: String,
     required: true,
   },
-  isVerified: {
-    type: Boolean,
-    default: false,
+  discordAvatar: {
+    type: String,
+    required: false,
   },
-  verificationToken: String,
-  resetPasswordToken: String,
-  resetPasswordExpires: Date,
+  discordEmail: {
+    type: String,
+    required: false,
+  },
+  discordAccessToken: {
+    type: String,
+    required: false,
+  },
+  discordRefreshToken: {
+    type: String,
+    required: false,
+  },
+  discordTokenExpires: {
+    type: Date,
+    required: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

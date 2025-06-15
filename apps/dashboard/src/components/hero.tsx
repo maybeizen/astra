@@ -49,14 +49,8 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted, loading }) => {
           Get Started for Free
         </Button>
 
-        <Button
-          variant="secondary"
-          size="lg"
-          rounded="md"
-          icon="fas fa-play"
-          className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
-        >
-          Watch Demo
+        <Button variant="glass" size="lg" rounded="md" icon="fas fa-play">
+          Learn More
         </Button>
       </motion.div>
     </div>
