@@ -19,6 +19,7 @@ export interface LoggerOptions {
   showTimestamp?: boolean;
   showPrefix?: boolean;
   box?: boolean;
+  instanceName?: string;
 }
 
 export interface LogOptions {
@@ -26,7 +27,7 @@ export interface LogOptions {
 }
 
 export class Logger {
-  private static instance: Logger;
+  private static instances: Map<string, Logger> = new Map();
   private options: LoggerOptions;
   private startTime: number;
 
@@ -40,16 +41,33 @@ export class Logger {
       showTimestamp: true,
       showPrefix: true,
       box: false,
+      instanceName: "default",
       ...options,
     };
     this.startTime = Date.now();
   }
 
   public static getInstance(options?: LoggerOptions): Logger {
-    if (!Logger.instance) {
-      Logger.instance = new Logger(options);
+    const instanceName = options?.instanceName || "default";
+
+    if (!Logger.instances.has(instanceName)) {
+      Logger.instances.set(
+        instanceName,
+        new Logger({
+          ...options,
+          instanceName,
+        })
+      );
+    } else if (options) {
+      // Update existing instance with new options if provided
+      const instance = Logger.instances.get(instanceName)!;
+      instance.options = {
+        ...instance.options,
+        ...options,
+      };
     }
-    return Logger.instance;
+
+    return Logger.instances.get(instanceName)!;
   }
 
   private getBoxenOptions(level: LogLevel): BoxenOptions {

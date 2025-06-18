@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import React, { useState } from "react";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 
 type NavbarProps = {
   children: React.ReactNode;
@@ -22,18 +22,15 @@ const Navbar = ({ children, className = "" }: NavbarProps) => {
   });
 
   return (
-    <motion.nav
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between w-full px-6 py-4 transition-all duration-300 ${
         isScrolled
           ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md"
           : "bg-transparent"
       } ${className}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.3 }}
     >
       {children}
-    </motion.nav>
+    </nav>
   );
 };
 

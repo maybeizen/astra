@@ -70,7 +70,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const baseClasses =
-    "font-medium transition-all duration-300 ease-in-out cursor-pointer";
+    "flex items-center justify-center gap-2 font-medium transition-all duration-300 ease-in-out cursor-pointer";
   const widthClass = fullWidth ? "w-full" : "";
   const disabledClass =
     disabled || loading
@@ -97,13 +97,9 @@ export const Button: React.FC<ButtonProps> = ({
       {loading ? (
         <>
           <span className="opacity-0 transition-opacity duration-300">
-            {icon && iconPosition === "left" && (
-              <i className={`${icon} mr-2`} />
-            )}
+            {icon && iconPosition === "left" && <i className={`${icon}`} />}
             {children}
-            {icon && iconPosition === "right" && (
-              <i className={`${icon} ml-2`} />
-            )}
+            {icon && iconPosition === "right" && <i className={`${icon}`} />}
           </span>
           <span className="absolute inset-0 flex items-center justify-center animate-fade-in">
             <i className="fa-solid fa-spinner-third animate-spin-clean" />
@@ -111,9 +107,9 @@ export const Button: React.FC<ButtonProps> = ({
         </>
       ) : (
         <>
-          {icon && iconPosition === "left" && <i className={`${icon} mr-2`} />}
+          {icon && iconPosition === "left" && <i className={`${icon}`} />}
           {children}
-          {icon && iconPosition === "right" && <i className={`${icon} ml-2`} />}
+          {icon && iconPosition === "right" && <i className={`${icon}`} />}
         </>
       )}
     </button>

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import {
-  Geist,
-  Geist_Mono,
   Figtree,
   Sora,
   Fira_Code,
@@ -10,6 +8,9 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import "../../public/fa/css/all.min.css";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { AlertProvider } from "@/contexts/AlertContext";
+import { NotificationContainer } from "@/components/notification";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -50,8 +51,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${figtree.variable} ${sora.variable} ${firaCode.variable} ${josefinSans.variable} ${inter.variable} antialiased`}
+        suppressHydrationWarning
       >
-        {children}
+        <AuthProvider>
+          <AlertProvider>
+            {children}
+            <NotificationContainer />
+          </AlertProvider>
+        </AuthProvider>
       </body>
     </html>
   );

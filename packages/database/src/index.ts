@@ -4,6 +4,7 @@ import { Logger } from "@astra/logger";
 const logger = Logger.getInstance({
   title: "Astra Database",
   showTimestamp: false,
+  instanceName: "database",
 });
 
 export interface DatabaseConfig {

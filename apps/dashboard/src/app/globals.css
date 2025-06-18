@@ -76,34 +76,6 @@ h6 {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(2rem) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.letter {
+.notification-text-container {
   display: inline-block;
-  animation: fadeSlideUp 0.6s ease-out forwards;
-  opacity: 0;
-}
-.letter:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.letter:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.letter:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.letter:nth-child(4) {
-  animation-delay: 0.25s;
-}
-.letter:nth-child(5) {
-  animation-delay: 0.3s;
 }

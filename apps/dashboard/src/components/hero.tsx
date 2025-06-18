@@ -1,49 +1,29 @@
-import { motion } from "framer-motion";
+"use client";
+
 import { Button } from "@/components/button";
 
-interface HeroProps {
-  onGetStarted: () => void;
-  loading: boolean;
-}
-
-export const Hero: React.FC<HeroProps> = ({ onGetStarted, loading }) => {
+export default function Hero() {
   return (
     <div className="max-w-7xl w-full flex flex-col items-center justify-center text-center relative z-10 py-20">
-      <motion.h1
-        className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white max-w-3xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
+      <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white max-w-3xl">
         The next generation of{" "}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
           Discord management
         </span>
-      </motion.h1>
+      </h1>
 
-      <motion.p
-        className="text-lg md:text-xl text-white/70 mt-6 max-w-2xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
+      <p className="text-lg md:text-xl text-white/70 mt-6 max-w-2xl">
         Powerful moderation, AI integration, and community tools designed to
         help your Discord server thrive.
-      </motion.p>
+      </p>
 
-      <motion.div
-        className="flex flex-col sm:flex-row gap-4 mt-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-      >
+      <div className="flex flex-col sm:flex-row gap-4 mt-10">
         <Button
           variant="primary"
           size="lg"
           rounded="md"
           icon="fab fa-discord"
-          loading={loading}
-          onClick={onGetStarted}
+          onClick={() => {}}
           className="shadow-lg shadow-white/20 transition-all duration-300"
         >
           Get Started for Free
@@ -52,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted, loading }) => {
         <Button variant="glass" size="lg" rounded="md" icon="fas fa-play">
           Learn More
         </Button>
-      </motion.div>
+      </div>
     </div>
   );
-};
+}

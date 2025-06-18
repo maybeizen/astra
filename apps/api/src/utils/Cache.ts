@@ -1,7 +1,5 @@
 import { Redis } from "ioredis";
 
-const redis = new Redis(
-  `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
-);
+const redis = new Redis(process.env.REDIS_URI!);
 
 export default redis;

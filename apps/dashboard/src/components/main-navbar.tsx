@@ -5,13 +5,12 @@ import { Navbar } from "./navbar/navbar";
 import { NavbarLink } from "./navbar/navbar-link";
 import { MobileMenu } from "./navbar/mobile-menu";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { env } from "@/utils/env";
 import { Button } from "./button";
 
 export const MainNavbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
