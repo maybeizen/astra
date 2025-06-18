@@ -1,5 +1,10 @@
-# NetherCore
+# Astra Discord Bot
 
-Advanced Discord bot for Nether Host.
+## Overview
 
-Built with Typescript, Discord.js, and CommandKit
+Astra Discord Bot
+
+## Tech Stack
+
+- Framework: CommandKit
+- Database: MongoDB
