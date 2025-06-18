@@ -3,10 +3,11 @@
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { env } from "@/utils/env";
-import { Guild, GuildList } from "@/components/guild";
+import { GuildList } from "@/components/guild/guild-list";
+import { Guild } from "@/components/guild/guild";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/button";
-import { ErrorPopup } from "@/components/guild/ErrorPopup";
+import { ErrorPopup } from "@/components/guild/error-popup";
 import { useNotification } from "@/hooks";
 
 interface GuildData {
