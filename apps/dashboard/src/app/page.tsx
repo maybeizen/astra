@@ -8,8 +8,6 @@ export default function Home() {
     <>
       <MainNavbar />
       <Container className="flex items-center justify-center min-h-screen pt-16 relative overflow-hidden font-sans">
-        <GridBackground />
-
         <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-500/30 rounded-full blur-[100px] opacity-30" />
 
         <Hero />

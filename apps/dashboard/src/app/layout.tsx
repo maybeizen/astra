@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${figtree.variable} ${sora.variable} ${firaCode.variable} ${josefinSans.variable} ${inter.variable} antialiased`}
+        className={`${figtree.variable} ${sora.variable} ${firaCode.variable} ${josefinSans.variable} ${inter.variable} bg-zinc-950 antialiased`}
         suppressHydrationWarning
       >
         <AuthProvider>
