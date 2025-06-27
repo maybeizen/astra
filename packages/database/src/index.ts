@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Logger } from "@astra/logger";
+import * as models from "./models";
 
 const logger = Logger.getInstance({
   title: "Astra Database",
@@ -56,4 +57,4 @@ export async function disconnectFromDatabase(): Promise<void> {
   }
 }
 
-export { mongoose };
+export { mongoose, models };

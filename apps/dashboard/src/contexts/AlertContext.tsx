@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useCallback } from "react";
 
-export type NotificationVariant = "toast" | "banner" | "text";
+export type NotificationVariant = "toast";
 export type NotificationStyle =
   | "primary"
   | "secondary"

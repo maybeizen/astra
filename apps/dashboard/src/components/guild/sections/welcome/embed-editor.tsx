@@ -1,4 +1,4 @@
-import { InputLabel, TextArea, Input } from "@/components/ui";
+import { InputLabel, TextArea, Input } from "@/components/input";
 
 interface EmbedEditorProps {
   title: string;

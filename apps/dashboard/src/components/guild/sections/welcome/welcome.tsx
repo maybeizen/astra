@@ -13,16 +13,12 @@ export function Welcome({ guild }: WelcomeProps) {
     saving,
     welcomeMessage,
     setWelcomeMessage,
-    enableWelcome,
-    setEnableWelcome,
-    sendDm,
-    setSendDm,
     dmMessage,
     setDmMessage,
-    enableCard,
-    setEnableCard,
     cardMessage,
     setCardMessage,
+    cardContent,
+    setCardContent,
     channelId,
     setChannelId,
     welcomeType,
@@ -37,8 +33,12 @@ export function Welcome({ guild }: WelcomeProps) {
     setEmbedImage,
     cardImageUrl,
     setCardImageUrl,
+    showCount,
+    setShowCount,
     enableEmbed,
     setEnableEmbed,
+    globalEnabled,
+    setGlobalEnabled,
     saveWelcomeData,
   } = useWelcomeState(guild.id);
 
@@ -47,10 +47,13 @@ export function Welcome({ guild }: WelcomeProps) {
       <GuildSection
         title="Welcome Settings"
         description="Configure welcome messages and onboarding for new members."
-        className="flex flex-col gap-4 w-full bg-neutral-900/50 rounded-lg p-4"
+        className="w-full"
       >
-        <div className="flex items-center justify-center py-8">
-          <i className="fas fa-spinner-third animate-spin text-2xl"></i>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-neutral-400">Loading welcome settings...</p>
+          </div>
         </div>
       </GuildSection>
     );
@@ -60,48 +63,40 @@ export function Welcome({ guild }: WelcomeProps) {
     <GuildSection
       title="Welcome Settings"
       description="Configure welcome messages and onboarding for new members."
-      className="flex flex-col gap-4 w-full bg-neutral-900/50 rounded-lg p-4"
+      className="w-full"
       onSave={saveWelcomeData}
       saving={saving}
     >
-      <div className="bg-neutral-800/50 rounded-lg p-4">
-        <h3 className="text-lg font-semibold mb-3">Welcome Configuration</h3>
-        <p className="text-neutral-400 mb-4">
-          Customize how new members are welcomed to {guild.name}. Choose one
-          welcome type below.
-        </p>
-
-        <WelcomeForm
-          channelId={channelId}
-          setChannelId={setChannelId}
-          welcomeType={welcomeType}
-          setWelcomeType={setWelcomeType}
-          enableWelcome={enableWelcome}
-          setEnableWelcome={setEnableWelcome}
-          welcomeMessage={welcomeMessage}
-          setWelcomeMessage={setWelcomeMessage}
-          sendDm={sendDm}
-          setSendDm={setSendDm}
-          dmMessage={dmMessage}
-          setDmMessage={setDmMessage}
-          enableCard={enableCard}
-          setEnableCard={setEnableCard}
-          cardMessage={cardMessage}
-          setCardMessage={setCardMessage}
-          cardImageUrl={cardImageUrl}
-          setCardImageUrl={setCardImageUrl}
-          enableEmbed={enableEmbed}
-          setEnableEmbed={setEnableEmbed}
-          embedTitle={embedTitle}
-          setEmbedTitle={setEmbedTitle}
-          embedDescription={embedDescription}
-          setEmbedDescription={setEmbedDescription}
-          embedColor={embedColor}
-          setEmbedColor={setEmbedColor}
-          embedImage={embedImage}
-          setEmbedImage={setEmbedImage}
-        />
-      </div>
+      <WelcomeForm
+        channelId={channelId}
+        setChannelId={setChannelId}
+        welcomeType={welcomeType}
+        setWelcomeType={setWelcomeType}
+        welcomeMessage={welcomeMessage}
+        setWelcomeMessage={setWelcomeMessage}
+        dmMessage={dmMessage}
+        setDmMessage={setDmMessage}
+        cardMessage={cardMessage}
+        setCardMessage={setCardMessage}
+        cardContent={cardContent}
+        setCardContent={setCardContent}
+        cardImageUrl={cardImageUrl}
+        setCardImageUrl={setCardImageUrl}
+        showCount={showCount}
+        setShowCount={setShowCount}
+        enableEmbed={enableEmbed}
+        setEnableEmbed={setEnableEmbed}
+        embedTitle={embedTitle}
+        setEmbedTitle={setEmbedTitle}
+        embedDescription={embedDescription}
+        setEmbedDescription={setEmbedDescription}
+        embedColor={embedColor}
+        setEmbedColor={setEmbedColor}
+        embedImage={embedImage}
+        setEmbedImage={setEmbedImage}
+        globalEnabled={globalEnabled}
+        setGlobalEnabled={setGlobalEnabled}
+      />
     </GuildSection>
   );
 }

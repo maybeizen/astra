@@ -1,12 +1,21 @@
-import express, { Application } from "express";
-import router from "./routes";
+import express, { Application, Router } from "express";
 import cors from "cors";
 import session from "express-session";
 import passport from "passport";
 import MongoStore from "connect-mongo";
-import { DiscordController } from "./controllers/auth/DiscordController";
+import { DiscordController } from "./modules/auth/DiscordController";
+import healthRoutes from "./modules/health/HealthRoutes";
+import authRoutes from "./modules/auth/AuthRoutes";
+import guildRoutes from "./modules/guild/GuildRoutes";
+import welcomeRoutes from "./modules/welcome/WelcomeRoutes";
 
 const app: Application = express();
+const router: Router = Router();
+
+router.use("/health", healthRoutes);
+router.use("/auth", authRoutes);
+router.use("/guilds", guildRoutes);
+router.use("/welcomes", welcomeRoutes);
 
 app.use(
   session({

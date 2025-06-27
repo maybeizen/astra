@@ -1,2 +1,2 @@
-export * from "./welcome.d";
-export * from "./auth.d";
+export * from "../modules/welcome/types";
+export * from "../modules/auth/types";

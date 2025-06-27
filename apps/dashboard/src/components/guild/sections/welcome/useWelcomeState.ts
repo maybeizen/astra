@@ -10,11 +10,9 @@ export function useWelcomeState(guildId: string) {
   const { success, error: showError } = useNotification();
 
   const [welcomeMessage, setWelcomeMessage] = useState("");
-  const [enableWelcome, setEnableWelcome] = useState(false);
-  const [sendDm, setSendDm] = useState(false);
   const [dmMessage, setDmMessage] = useState("");
-  const [enableCard, setEnableCard] = useState(false);
   const [cardMessage, setCardMessage] = useState("");
+  const [cardContent, setCardContent] = useState("");
   const [channelId, setChannelId] = useState("");
   const [welcomeType, setWelcomeType] = useState("message");
   const [embedTitle, setEmbedTitle] = useState("");
@@ -22,7 +20,9 @@ export function useWelcomeState(guildId: string) {
   const [embedColor, setEmbedColor] = useState("#5865F2");
   const [embedImage, setEmbedImage] = useState("");
   const [cardImageUrl, setCardImageUrl] = useState("");
+  const [showCount, setShowCount] = useState(false);
   const [enableEmbed, setEnableEmbed] = useState(false);
+  const [globalEnabled, setGlobalEnabled] = useState(true);
 
   const fetchWelcomeData = async () => {
     try {
@@ -38,14 +38,19 @@ export function useWelcomeState(guildId: string) {
           setWelcomeData(welcome);
 
           setWelcomeMessage(welcome.message?.content || "");
-          setEnableWelcome(welcome.message?.enabled || false);
-          setSendDm(welcome.dm?.enabled || false);
           setDmMessage(welcome.dm?.content || "");
-          setEnableCard(welcome.card?.enabled || false);
-          setCardMessage(welcome.card?.content || "");
+          setCardMessage(welcome.card?.cardMessage || "");
+          setCardContent(welcome.card?.content || "");
           setChannelId(welcome.channelId || "");
           setWelcomeType(welcome.type || "message");
           setCardImageUrl(welcome.card?.imageUrl || "");
+          setShowCount(welcome.card?.showCount || false);
+
+          const hasAnyEnabled =
+            welcome.message?.enabled ||
+            welcome.dm?.enabled ||
+            welcome.card?.enabled;
+          setGlobalEnabled(hasAnyEnabled !== false);
 
           if (welcome.message?.embed) {
             setEnableEmbed(true);
@@ -66,8 +71,11 @@ export function useWelcomeState(guildId: string) {
               content: null,
               embed: null,
               imageUrl: null,
+              showCount: false,
+              cardMessage: null,
             },
           });
+          setGlobalEnabled(true);
         }
       } else {
         console.error("Failed to fetch welcome data");
@@ -79,7 +87,58 @@ export function useWelcomeState(guildId: string) {
     }
   };
 
+  const validateWelcomeSettings = () => {
+    if (!globalEnabled) {
+      return true;
+    }
+
+    if (!channelId.trim()) {
+      showError("Channel ID is required", { duration: 5000 });
+      return false;
+    }
+
+    switch (welcomeType) {
+      case "message":
+        if (!welcomeMessage.trim()) {
+          showError("Welcome message is required for text messages", {
+            duration: 5000,
+          });
+          return false;
+        }
+        break;
+      case "dm":
+        if (!dmMessage.trim()) {
+          showError("DM message is required for direct messages", {
+            duration: 5000,
+          });
+          return false;
+        }
+        break;
+      case "card":
+        if (!cardContent.trim() && !cardMessage.trim()) {
+          showError(
+            "Either card content or card image text is required for welcome cards",
+            { duration: 5000 }
+          );
+          return false;
+        }
+        if (!cardImageUrl.trim()) {
+          showError("Card image URL is required for welcome cards", {
+            duration: 5000,
+          });
+          return false;
+        }
+        break;
+    }
+
+    return true;
+  };
+
   const saveWelcomeData = async () => {
+    if (!validateWelcomeSettings()) {
+      return;
+    }
+
     try {
       setSaving(true);
 
@@ -92,9 +151,9 @@ export function useWelcomeState(guildId: string) {
           }
         : null;
 
-      const isMessageEnabled = welcomeType === "message" && enableWelcome;
-      const isDmEnabled = welcomeType === "dm" && sendDm;
-      const isCardEnabled = welcomeType === "card" && enableCard;
+      const isMessageEnabled = globalEnabled && welcomeType === "message";
+      const isDmEnabled = globalEnabled && welcomeType === "dm";
+      const isCardEnabled = globalEnabled && welcomeType === "card";
 
       const payload = {
         guildId: guildId,
@@ -112,9 +171,11 @@ export function useWelcomeState(guildId: string) {
         },
         card: {
           enabled: isCardEnabled,
-          content: isCardEnabled ? cardMessage || null : null,
+          content: isCardEnabled ? cardContent || null : null,
           embed: null,
           imageUrl: isCardEnabled ? cardImageUrl || null : null,
+          showCount: isCardEnabled ? showCount : false,
+          cardMessage: isCardEnabled ? cardMessage || null : null,
         },
       };
 
@@ -164,22 +225,6 @@ export function useWelcomeState(guildId: string) {
   };
 
   useEffect(() => {
-    if (welcomeType === "message") {
-      setEnableWelcome(true);
-      setSendDm(false);
-      setEnableCard(false);
-    } else if (welcomeType === "dm") {
-      setEnableWelcome(false);
-      setSendDm(true);
-      setEnableCard(false);
-    } else if (welcomeType === "card") {
-      setEnableWelcome(false);
-      setSendDm(false);
-      setEnableCard(true);
-    }
-  }, [welcomeType]);
-
-  useEffect(() => {
     fetchWelcomeData();
   }, [guildId]);
 
@@ -190,16 +235,12 @@ export function useWelcomeState(guildId: string) {
 
     welcomeMessage,
     setWelcomeMessage,
-    enableWelcome,
-    setEnableWelcome,
-    sendDm,
-    setSendDm,
     dmMessage,
     setDmMessage,
-    enableCard,
-    setEnableCard,
     cardMessage,
     setCardMessage,
+    cardContent,
+    setCardContent,
     channelId,
     setChannelId,
     welcomeType,
@@ -214,8 +255,12 @@ export function useWelcomeState(guildId: string) {
     setEmbedImage,
     cardImageUrl,
     setCardImageUrl,
+    showCount,
+    setShowCount,
     enableEmbed,
     setEnableEmbed,
+    globalEnabled,
+    setGlobalEnabled,
 
     saveWelcomeData,
     fetchWelcomeData,

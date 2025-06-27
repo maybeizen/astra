@@ -19,16 +19,18 @@ export interface WelcomeData {
     content: string | null;
     embed: WelcomeEmbed | null;
     imageUrl: string | null;
+    showCount: boolean;
+    cardMessage: string | null;
   };
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 export interface WelcomeEmbed {
-  title: string | null;
-  description: string | null;
-  color: string | null;
-  image: string | null;
+  title?: string;
+  description?: string;
+  color?: string;
+  image?: string;
 }
 
 export interface Guild {

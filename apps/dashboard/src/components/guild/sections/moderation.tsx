@@ -1,5 +1,5 @@
 import GuildSection from "@/components/guild/section";
-import { InputLabel, SelectMenu, Checkbox } from "@/components/ui";
+import { InputLabel, SelectMenu, Checkbox } from "@/components/input";
 import { useState } from "react";
 import { useNotification } from "@/hooks";
 

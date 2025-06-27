@@ -32,7 +32,7 @@ const Notification: React.FC<NotificationProps> = ({
   useEffect(() => {
     const showTimer = setTimeout(() => {
       setIsVisible(true);
-    }, 10);
+    }, 50);
 
     return () => clearTimeout(showTimer);
   }, []);
@@ -41,7 +41,7 @@ const Notification: React.FC<NotificationProps> = ({
     setIsExiting(true);
     setTimeout(() => {
       if (onClose) onClose();
-    }, 500);
+    }, 300);
   };
 
   useEffect(() => {
@@ -55,14 +55,10 @@ const Notification: React.FC<NotificationProps> = ({
 
   const variantClasses = {
     toast: "max-w-sm shadow-lg rounded-lg overflow-hidden",
-    banner: "w-full shadow-md",
-    text: "inline-flex items-center",
   };
 
   const positionClasses: Record<NotificationVariant, string> = {
     toast: "",
-    banner: "",
-    text: "",
   };
 
   const styleClasses = {
@@ -77,22 +73,14 @@ const Notification: React.FC<NotificationProps> = ({
   const animationClasses = {
     entering: {
       toast:
-        "transform translate-x-0 opacity-100 transition-all duration-500 ease-out",
-      banner:
-        "transform translate-y-0 opacity-100 transition-all duration-500 ease-out",
-      text: "opacity-100 transition-opacity duration-300 ease-out",
+        "transform translate-x-0 opacity-100 scale-100 transition-all duration-300 ease-out",
     },
     exiting: {
       toast:
-        "transform translate-x-full opacity-0 transition-all duration-500 ease-in",
-      banner:
-        "transform -translate-y-full opacity-0 transition-all duration-500 ease-in",
-      text: "opacity-0 transition-opacity duration-300 ease-in",
+        "transform translate-x-full opacity-0 scale-95 transition-all duration-300 ease-in",
     },
     initial: {
-      toast: "transform translate-x-full opacity-0",
-      banner: "transform translate-y-full opacity-0",
-      text: "opacity-0",
+      toast: "transform translate-x-full opacity-0 scale-95",
     },
   };
 
@@ -113,6 +101,7 @@ const Notification: React.FC<NotificationProps> = ({
         backdrop-blur-sm 
         shadow-md
         ring-1 ring-white/10
+        will-change-transform
       `}
       role="alert"
     >
@@ -121,16 +110,14 @@ const Notification: React.FC<NotificationProps> = ({
         <NotificationContent style={style} variant={variant}>
           {children}
         </NotificationContent>
-        {variant !== "text" && (
-          <button
-            type="button"
-            className="notification-close ml-auto text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
-            onClick={handleClose}
-            aria-label="Close"
-          >
-            <i className="fas fa-xmark" />
-          </button>
-        )}
+        <button
+          type="button"
+          className="notification-close ml-auto text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+          onClick={handleClose}
+          aria-label="Close"
+        >
+          <i className="fas fa-xmark" />
+        </button>
       </div>
     </div>
   );
