@@ -75,7 +75,3 @@ h6 {
 .animate-pulse-subtle {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
-
-.notification-text-container {
-  display: inline-block;
-}

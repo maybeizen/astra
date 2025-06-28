@@ -19,7 +19,7 @@ const NotificationContent: React.FC<NotificationContentProps> = ({
 }) => {
   return (
     <div
-      className={`notification-content notification-content-${style} notification-content-${variant}`}
+      className={`notification-content notification-content-${style} notification-content-${variant} text-white text-sm`}
     >
       {children}
     </div>
